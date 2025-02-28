@@ -1,11 +1,17 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import Auth from "../models/Auth";
+import { validationResult } from "express-validator";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export const register = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
   const user = await Auth.findOne({ where: { email } });
 
