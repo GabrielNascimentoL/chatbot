@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { index, create} from '../controllers/NoteController';
+import { index, create} from '../controllers/ChatController';
 
 const router = Router();
 

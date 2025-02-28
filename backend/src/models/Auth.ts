@@ -1,7 +1,7 @@
 import { Model, DataTypes, Optional } from "sequelize";
 import sequelize from "../database";
 import bcrypt from 'bcrypt';
-import Note from "./Note";
+import Note from "./Chat";
 
 interface AuthAttributes {
   id: number;

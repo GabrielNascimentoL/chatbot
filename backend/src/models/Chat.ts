@@ -3,26 +3,24 @@ import sequelize from "../database";
 import bcrypt from "bcrypt";
 import Auth from "./Auth";
 
-interface NoteAttributes {
+interface ChatAttributes {
   id: number;
   title: string;
-  content: string;
   userId: number;
 }
 
-interface NoteCreationAttributes extends Optional<NoteAttributes, "id"> {}
+interface ChatCreationAttributes extends Optional<ChatAttributes, "id"> {}
 
-class Note
-  extends Model<NoteAttributes, NoteCreationAttributes>
-  implements NoteAttributes
+class Chat
+  extends Model<ChatAttributes, ChatCreationAttributes>
+  implements ChatAttributes
 {
   public id!: number;
   public title!: string;
-  public content!: string;
   public userId!: number;
 }
 
-Note.init(
+Chat.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -30,10 +28,6 @@ Note.init(
       primaryKey: true,
     },
     title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    content: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -48,9 +42,9 @@ Note.init(
   },
   {
     sequelize,
-    tableName: "notes",
+    tableName: "chats",
   }
 );
 
 
-export default Note;
+export default Chat;

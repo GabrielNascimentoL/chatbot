@@ -2,15 +2,11 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('notes', {
+    await queryInterface.createTable('messages', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-      },
-      title: {
-        type: Sequelize.STRING,
-        allowNull: false,
       },
       content: {
         type: Sequelize.STRING,
@@ -21,6 +17,16 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'users', 
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      chatId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'chats', 
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -40,6 +46,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('notes');
+    await queryInterface.dropTable('messages');
   },
 };

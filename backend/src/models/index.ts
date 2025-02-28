@@ -1,15 +1,37 @@
 
 import Auth from './Auth';
-import Note from './Note';
+import Chat from './Chat';
+import Message from './Message';
 
-Auth.hasMany(Note, {
+Auth.hasMany(Chat, {
   foreignKey: 'userId',
   sourceKey: 'id',
 });
 
-Note.belongsTo(Auth, {
+Chat.belongsTo(Auth, {
   foreignKey: 'userId',
   targetKey: 'id',
 });
 
-export { Auth, Note };
+Auth.hasMany(Message, {
+  foreignKey: 'userId',
+  sourceKey: 'id',
+});
+
+Message.belongsTo(Auth, {
+  foreignKey: 'userId',
+  targetKey: 'id',
+});
+
+Chat.hasMany(Message, {
+  foreignKey: 'chatId',
+  sourceKey: 'id',
+});
+
+Message.belongsTo(Chat, {
+  foreignKey: 'chatId',
+  targetKey: 'id',
+});
+
+
+export { Auth, Chat, Message };
